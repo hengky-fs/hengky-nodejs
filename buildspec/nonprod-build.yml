@@ -3,6 +3,13 @@ phases:
   install:
     runtime-versions:
       nodejs: 16
+    commands:
+      - docker version
+      - curl -JLO https://github.com/docker/buildx/releases/download/v0.4.2/buildx-v0.4.2.linux-amd64
+      - mkdir -p ~/.docker/cli-plugins
+      - mv buildx-v0.4.2.linux-amd64 ~/.docker/cli-plugins/docker-buildx
+      - chmod a+rx ~/.docker/cli-plugins/docker-buildx
+      - docker run --privileged --rm tonistiigi/binfmt --install all
   pre_build:  
     commands: 
       - aws ecr get-login-password --region ap-southeast-3 | docker login --username AWS --password-stdin 683031685817.dkr.ecr.ap-southeast-3.amazonaws.com
