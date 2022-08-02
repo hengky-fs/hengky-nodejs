@@ -1,0 +1,20 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+  pre_build:  
+    commands: 
+      - aws ecr get-login-password --region ap-southeast-3 | docker login --username AWS --password-stdin 683031685817.dkr.ecr.ap-southeast-3.amazonaws.com
+      - REPOSITORY_URI=683031685817.dkr.ecr.ap-southeast-3.amazonaws.com/dev-hengky-nodejs
+      - IMAGE_TAG=$(echo $CODEBUILD_SOURCE_VERSION | cut -c 1-7)
+  build:  
+    commands: 
+      - npm install
+      - docker buildx build --platform=linux/amd64 -t $REPOSITORY_URI:latest . 
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo push latest Docker images to ECR...
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - docker push $REPOSITORY_URI:latest
