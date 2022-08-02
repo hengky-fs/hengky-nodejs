@@ -2,11 +2,9 @@ FROM node:14
 
 WORKDIR /usr/users
 
-COPY src src/
+COPY . .
 
-COPY package.json .
-
-RUN npm i --quiet
+ENV PORT=80
 
 EXPOSE 80
 
