@@ -1,0 +1,5 @@
+{
+  "DB_DOCKER_CONTAINER": "p2p-db",
+  "DB_DOCKER_IMAGE": "mysql/mysql-server:5.7.12",
+  "NETWORK_NAME": "fasset-net"
+}

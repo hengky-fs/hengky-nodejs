@@ -1,0 +1,11 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+  pre_build:  
+    commands: 
+      - echo Take env value from parameter store...
+      - pwd
+      - ls -lah
+      - printenv

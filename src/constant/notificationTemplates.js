@@ -1,0 +1,33 @@
+module.exports = {
+  LINK: {
+    'WEB': '',
+    'ANDROID': '',
+    'IOS': '',
+  },
+  TYPE: {
+    'EMAIL': 1,
+    'NOTIFICATION': 2,
+  },
+  SLUG: {
+    CREATE_ORDER: 'create-order',
+    RECEIVED_ORDER: 'received-order',
+    PAID_ORDER: 'paid-order',
+    EXPIRED_ORDER: 'expired-order',
+    EXPIRED_ORDER_DOER: 'expired-order-doer',
+    REJECTED_ORDER: 'rejected-order',
+    CANCELLED_ORDER: 'cancelled-order',
+    CANCELLED_ORDER_DOER: 'cancelled-order-doer',
+    DISPUTED_ORDER: 'disputed-order',
+    DISPUTED_ORDER_AUTO: 'disputed-order-auto',
+    DISPUTED_ORDER_AUTO_FOR_BROKER: 'disputed-order-auto-for-broker',
+    ORDER_DISPUTED_IN_PROGRESS: 'order-disputed-in-progress',
+    ORDER_DISPUTED_RESOLVED_FOR_USER: 'order-disputed-resolved-for-user',
+    ORDER_DISPUTED_RESOLVED_FOR_BROKER: 'order-disputed-resolved-for-broker',
+    ORDER_DISPUTED_REVOKED_FOR_USER: 'order-disputed-revoked-for-user',
+    ORDER_DISPUTED_REVOKED_FOR_BROKER: 'order-disputed-revoked-for-broker',
+    ACCEPTED_ORDER: 'accepted-order',
+    ACCEPTED_ORDER_SELL: 'accepted-order-sell',
+    RELEASED_ORDER_COIN: 'released-order-coin',
+    RECEIVED_ORDER_COIN: 'received-order-coin',
+  },
+};
