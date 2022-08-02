@@ -18,10 +18,12 @@ phases:
   build:  
     commands: 
       - npm install
-      - docker buildx build --platform=linux/amd64 -t $REPOSITORY_URI:latest . 
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker buildx build --platform=linux/amd64 -t $$REPOSITORY_URI:$IMAGE_TAG .
   post_build:
     commands:
-      - echo push latest Docker images to ECR...
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - docker push $REPOSITORY_URI:latest
+      - aws ssm put-parameter --name /infra/codebuild/dev-hengky-nodejs/LATEST_IMAGE_TAG --type "String" --value $IMAGE_TAG --overwrite
+artifacts: 
+    type: zip
+    files:
+      - taskdef.json      

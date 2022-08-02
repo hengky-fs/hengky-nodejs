@@ -1,0 +1,15 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+  pre_build:  
+    commands: 
+      - pwd
+      - ls -lah
+      - IMAGE_TAG=$(aws ssm get-parameter --name /infra/codebuild/dev-hengky-nodejs/LATEST_IMAGE_TAG  --with-decryption --query "Parameter.{Value:Value}" --output text)
+      - echo $IMAGE_TAG | awk '{ print "sed -i 's,{IMAGE_TAG},'"$0",g taskdef.json"  }' | bash -
+  build:  
+    commands: 
+      - TASKDEF_REVISION=$(aws ecs register-task-definition --cli-input-json file://taskdef.json --query "taskDefinition.revision")
+      - aws ecs update-service --cluster dev-ecs-v1 --service dev-service-hengky-nodejs --task-definition dev-task-hengky-nodejs:$TASKDEF_REVISION

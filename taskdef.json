@@ -1,0 +1,37 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "hengky-nodejs",
+            "image": "683031685817.dkr.ecr.ap-southeast-3.amazonaws.com/dev-hengky-nodejs:{IMAGE_TAG}",
+            "cpu": 256,
+            "memory": 512,
+            "memoryReservation": 512,
+            "essential": true,
+            "portMappings": [
+              {
+                "hostPort": 80,
+                "protocol": "tcp",
+                "containerPort": 80
+              }
+            ],
+            "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                "awslogs-group": "/service/dev/log/hengky-nodejs",
+                "awslogs-region": "ap-southeast-3",
+                "awslogs-create-group": "true",
+                "awslogs-stream-prefix": "service-hengky-nodejs"
+              }
+            }
+        }
+    ],
+    "family": "dev-task-hengky-nodejs",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+      "EC2",
+      "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512",
+    "executionRoleArn": "arn:aws:iam::683031685817:role/dev-ECSTaskExecutionRole-role"
+}
